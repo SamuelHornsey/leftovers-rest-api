@@ -11,10 +11,8 @@ import os
 
 import requests
 
-FORMAT = '%(levelname)s:%(asctime)-15s %(message)s'
-
-logging.basicConfig(level=logging.DEBUG, format=FORMAT)
-LOGGER = logging.getLogger(__name__)
+LOGGER = logging.getLogger()
+LOGGER.setLevel(logging.INFO)
 
 # Get API key
 API_URL = 'https://api.spoonacular.com'
@@ -49,12 +47,12 @@ def handler(*args):
     method = event.get('httpMethod')
     path = event.get('path')
 
-    LOGGER.debug(params)
+    LOGGER.info(params)
 
     # get url
     url = make_url(path, params)
 
-    LOGGER.debug(url)
+    LOGGER.info(url)
 
     req = requests.request(
         method,
